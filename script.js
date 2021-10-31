@@ -12,5 +12,11 @@ const shrinkCursor = function () {
 }
 
 // run fuction
+document.addEventListener("mousedown", function () {
+    growCursor()
+})
 
+document.addEventListener("mouseup", function () {
+    shrinkCursor()
+})
 
