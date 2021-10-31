@@ -1,5 +1,6 @@
 const cursor = document.querySelector("div.cursor")
-const canvasTag = document.querySelector("canvas.in")
+const canvasIn = document.querySelector("canvas.in")
+const canvasOut = document.querySelector("canvas.out")
 
 let isMouseDown = false;
 
@@ -38,8 +39,15 @@ const setupCanvas = function (canvas) {
     const context = canvas.getContext("2d");
     context.scale(dpi, dpi)
 
-    context.fillStyle = "#000";
-    context.strokeStyle = "#fff";
+    if (canvas.classList.contains("in")) {
+        context.fillStyle = "#000";
+        context.strokeStyle = "#fff";
+    } else {
+        context.fillStyle = "#fff";
+        context.strokeStyle = "#000";
+    }
+
+    
     context.lineWidth = 80;
     // round the ends of the line
     context.lineCap = "round";
@@ -70,13 +78,15 @@ const moveDraw = function (canvas, x, y) {
 
 
 // Events 
-setupCanvas(canvasTag);
+setupCanvas(canvasIn);
+setupCanvas(canvasOut);
 
 // Grow the cursor on click 
 document.addEventListener("mousedown", function (event) {
     isMouseDown = true
     growCursor()
-    startDraw(canvasTag, event.pageX, event.pageY)
+    startDraw(canvasIn, event.pageX, event.pageY)
+    startDraw(canvasOut, event.pageX, event.pageY)
 })
 
 // shrink cursor off click 
@@ -90,5 +100,6 @@ document.addEventListener("mousemove", function (event) {
     // event.pageX -> where we are on the page across
     // event.pageY -> where we are on the page downwards
     moveCursor(event.pageX, event.pageY);
-    moveDraw(canvasTag, event.pageX, event.pageY);
+    moveDraw(canvasIn, event.pageX, event.pageY);
+    moveDraw(canvasOut, event.pageX, event.pageY);
 })
