@@ -38,18 +38,23 @@ const setupCanvas = function (canvas) {
     const context = canvas.getContext("2d");
     context.scale(dpi, dpi)
 
-    context.fillStyle = "red";
-    context.strokeStyle = "red";
+    context.fillStyle = "#fff";
+    context.strokeStyle = "#000";
     context.lineWidth = 80;
     // round the ends of the line
     context.lineCap = "round";
     // round the joins for smooth movement
     context.lineJoin = "round";
+
+    // create white background
+    context.rect(0, 0, w, h);
+    context.fill();
 }
 
 // start to draw based on the canvas, x and y 
 const startDraw = function (canvas, x ,y) {
     const context = canvas.getContext("2d");
+    context.beginPath();
     context.moveTo(x, y);
 }
 
@@ -61,7 +66,6 @@ const moveDraw = function (canvas, x, y) {
         context.stroke();
     }
 }
-
 
 
 
