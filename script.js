@@ -47,12 +47,15 @@ const setupCanvas = function (canvas) {
         context.strokeStyle = "#000";
     }
 
-    
+    // these are taken from Canvas API
     context.lineWidth = 80;
     // round the ends of the line
     context.lineCap = "round";
     // round the joins for smooth movement
     context.lineJoin = "round";
+    // add shadow and use variable context.strokeStyle for both blend modes
+    context.shadowBlur = 10;
+    context.shadowColor = context.strokeStyle;
 
     // create white background
     context.rect(0, 0, w, h);
