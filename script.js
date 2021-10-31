@@ -103,3 +103,11 @@ document.addEventListener("mousemove", function (event) {
     moveDraw(canvasIn, event.pageX, event.pageY);
     moveDraw(canvasOut, event.pageX, event.pageY);
 })
+
+
+// make responsive 
+ 
+window.addEventListener("resize", function () {
+    setupCanvas(canvasIn);
+    setupCanvas(canvasOut);
+})
