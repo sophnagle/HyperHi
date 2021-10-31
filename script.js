@@ -1,6 +1,8 @@
 const cursor = document.querySelector("div.cursor")
 const canvasTag = document.querySelector("canvas.in")
 
+let isMouseDown = false;
+
 
 // Functions
 // when user clicks and hold make cursor bigger
@@ -45,17 +47,19 @@ const setupCanvas = function (canvas) {
     context.lineJoin = "round";
 }
 
-// start to draw 
-const startDraw = function (canvas) {
+// start to draw based on the canvas, x and y 
+const startDraw = function (canvas, x ,y) {
     const context = canvas.getContext("2d");
-    context.fillStyle = "yellow"
+    context.moveTo(x, y);
 }
 
 // draw based on three things, canvas, X and Y
 const moveDraw = function (canvas, x, y) {
     const context = canvas.getContext("2d");
-    context.lineTo(x,y);
-    context.stroke();
+    if (isMouseDown) {
+        context.lineTo(x,y);
+        context.stroke();
+    }
 }
 
 
@@ -65,13 +69,15 @@ const moveDraw = function (canvas, x, y) {
 setupCanvas(canvasTag);
 
 // Grow the cursor on click 
-document.addEventListener("mousedown", function () {
+document.addEventListener("mousedown", function (event) {
+    isMouseDown = true
     growCursor()
-    startDraw(canvasTag)
+    startDraw(canvasTag, event.pageX, event.pageY)
 })
 
 // shrink cursor off click 
 document.addEventListener("mouseup", function () {
+    isMouseDown = false
     shrinkCursor()
 })
 
