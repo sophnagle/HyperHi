@@ -38,8 +38,8 @@ const setupCanvas = function (canvas) {
     const context = canvas.getContext("2d");
     context.scale(dpi, dpi)
 
-    context.fillStyle = "#fff";
-    context.strokeStyle = "#000";
+    context.fillStyle = "#000";
+    context.strokeStyle = "#fff";
     context.lineWidth = 80;
     // round the ends of the line
     context.lineCap = "round";
