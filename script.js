@@ -31,7 +31,35 @@ const setupCanvas = function (canvas) {
     // this is canvas in css
     canvas.style.width = w + "px";
     canvas.style.height = h + "px";
+
+    // which context are we talking about? 2d? 3d?
+    const context = canvas.getContext("2d");
+    context.scale(dpi, dpi)
+
+    context.fillStyle = "red";
+    context.strokeStyle = "red";
+    context.lineWidth = 80;
+    // round the ends of the line
+    context.lineCap = "round";
+    // round the joins for smooth movement
+    context.lineJoin = "round";
 }
+
+// start to draw 
+const startDraw = function (canvas) {
+    const context = canvas.getContext("2d");
+    context.fillStyle = "yellow"
+}
+
+// draw based on three things, canvas, X and Y
+const moveDraw = function (canvas, x, y) {
+    const context = canvas.getContext("2d");
+    context.lineTo(x,y);
+    context.stroke();
+}
+
+
+
 
 // Events 
 setupCanvas(canvasTag);
@@ -39,6 +67,7 @@ setupCanvas(canvasTag);
 // Grow the cursor on click 
 document.addEventListener("mousedown", function () {
     growCursor()
+    startDraw(canvasTag)
 })
 
 // shrink cursor off click 
@@ -50,5 +79,6 @@ document.addEventListener("mouseup", function () {
 document.addEventListener("mousemove", function (event) {
     // event.pageX -> where we are on the page across
     // event.pageY -> where we are on the page downwards
-    moveCursor(event.pageX, event.pageY)
+    moveCursor(event.pageX, event.pageY);
+    moveDraw(canvasTag, event.pageX, event.pageY);
 })
